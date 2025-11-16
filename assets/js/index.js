@@ -1,54 +1,84 @@
-document.addEventListener('DOMContentLoaded', () => {
+$(function () {
+  const $contactForm = $("#contactForm");
+  const $inputName = $("#contactInputName");
+  const $inputEmail = $("#contactInputEmail");
+  const $inputMsg = $("#contactTextArea");
+  const $divResults = $("#div-resultsForm");
+  const $btnSend = $("#BTN-contactSend");
 
-    const contactForm = document.getElementById("contactForm");
-    const inputName = document.getElementById("contactInputName");
-    const inputEmail = document.getElementById("contactInputEmail");
-    const inputMessage = document.getElementById("contactTextArea");
-    const divResults = document.getElementById("div-resultsForm");
-    const btnSend = document.getElementById("BTN-contactSend");
+  function isValidEmail(email) {
+    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    return regex.test(email);
+  }
 
-    contactForm.addEventListener("submit", function(event) {
-        event.preventDefault(); 
+  // --- Validación del formulario ---
+  $contactForm.on("submit", function (event) {
+    event.preventDefault();
 
-        // Obtener valores de los campos del formulario
-        const nameValue = inputName.value.trim();
-        const emailValue = inputEmail.value.trim();
-        const messageValue = inputMessage.value.trim();
+    const nameValue = $inputName.val().trim();
+    const emailValue = $inputEmail.val().trim();
+    const messageValue = $inputMsg.val().trim();
 
-        // Validación de campos vacíos 
-        if (nameValue === "" || emailValue === "" || messageValue === "") {
-
-            // Mostrar mensaje de error usando innerHTML 
-            divResults.innerHTML = `
+    // Validación simple
+    if (nameValue === "" || emailValue === "" || messageValue === "") {
+      $divResults.html(`
                 <div class="alert alert-danger" role="alert">
                     Error: Todos los campos son obligatorios.
                 </div>
-            `;
+            `);
 
-            // Restaurar botón al estado original
-            btnSend.classList.remove("btn-success");
-            btnSend.classList.add("btn-primary");
-            btnSend.innerHTML = `<i class="bi bi-send"></i> Enviar`;
-            btnSend.disabled = false;
+      $btnSend
+        .removeClass("btn-success")
+        .addClass("btn-primary")
+        .html(`<i class="bi bi-send"></i> Enviar`)
+        .prop("disabled", false);
 
-            return;
-        }
+      return;
+    }
 
-        // Mensaje de éxito usando innerHTML 
-        divResults.innerHTML = `
+    // 💡 Validación de email
+    if (!isValidEmail(emailValue)) {
+      $divResults.html(`
+                <div class="alert alert-danger" role="alert">
+                    Error: Ingresa un email válido.
+                </div>
+            `);
+
+      return;
+    }
+
+    // Mensaje de éxito
+    $divResults.html(`
             <div class="alert alert-success" role="alert">
                 Gracias por tu mensaje, <strong>${nameValue}</strong>. ¡Lo hemos recibido correctamente!
             </div>
-        `;
+        `);
 
-        // Cambiar el botón a "Enviado" + success
-        btnSend.classList.remove("btn-primary");
-        btnSend.classList.add("btn-success");
-        btnSend.innerHTML = `<i class="bi bi-check-circle"></i> Enviado`;
-        btnSend.disabled = true;
+    // Modo enviado
+    $btnSend
+      .removeClass("btn-primary")
+      .addClass("btn-success")
+      .html(`<i class="bi bi-check-circle"></i> Enviado`)
+      .prop("disabled", true);
 
-        // Limpiar formulario
-        contactForm.reset();
-    });
+    $contactForm.trigger("reset");
+  });
 
+  // Smooth Scroll SOLO para enlaces del menú
+  $('.navbar a[href^="#"]').on("click", function (event) {
+    const destino = $(this.getAttribute("href"));
+
+    if (this.getAttribute("href") === "#") return;
+
+    if (destino.length) {
+      event.preventDefault();
+      $("html, body").animate(
+        {
+          scrollTop: destino.offset().top,
+        },
+        800,
+        "swing"
+      );
+    }
+  });
 });

@@ -5,6 +5,39 @@ $(function () {
   const $inputMsg = $("#contactTextArea");
   const $divResults = $("#div-resultsForm");
   const $btnSend = $("#BTN-contactSend");
+  const $btnReset = $('button[type="reset"]');
+
+  function showAlert(type, message) {
+    // detener animaciones previas, ocultar, cambiar contenido y aparecer con fade
+    $divResults
+      .stop(true, true)
+      .hide()
+      .html(
+        `
+      <div class="alert alert-${type}" role="alert">
+        ${message}
+      </div>
+    `
+      )
+      .fadeIn(250);
+  }
+
+  // Oculta y limpia el div de resultados
+  function clearAlert() {
+    $divResults.stop(true, true).fadeOut(200, function () {
+      $(this).html("");
+    });
+  }
+
+  // Animación shake visible
+  function shakeForm() {
+    $contactForm
+      .animate({ left: "-10px" }, 80)
+      .animate({ left: "10px" }, 80)
+      .animate({ left: "-5px" }, 60)
+      .animate({ left: "5px" }, 60)
+      .animate({ left: "0px" }, 60);
+  }
 
   function isValidEmail(email) {
     const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
@@ -21,11 +54,8 @@ $(function () {
 
     // Validación simple
     if (nameValue === "" || emailValue === "" || messageValue === "") {
-      $divResults.html(`
-                <div class="alert alert-danger" role="alert">
-                    Error: Todos los campos son obligatorios.
-                </div>
-            `);
+      shakeForm();
+      showAlert("danger", "Error: Todos los campos son obligatorios.");
 
       $btnSend
         .removeClass("btn-success")
@@ -36,23 +66,18 @@ $(function () {
       return;
     }
 
-    // 💡 Validación de email
+    // Validación de email
     if (!isValidEmail(emailValue)) {
-      $divResults.html(`
-                <div class="alert alert-danger" role="alert">
-                    Error: Ingresa un email válido.
-                </div>
-            `);
-
+      shakeForm();
+      showAlert("danger", "Error: Ingresa un email válido.");
       return;
     }
 
-    // Mensaje de éxito
-    $divResults.html(`
-            <div class="alert alert-success" role="alert">
-                Gracias por tu mensaje, <strong>${nameValue}</strong>. ¡Lo hemos recibido correctamente!
-            </div>
-        `);
+    // Mensaje de éxito (fade in)
+    showAlert(
+      "success",
+      `Gracias por tu mensaje, <strong>${nameValue}</strong>. ¡Lo hemos recibido correctamente!`
+    );
 
     // Modo enviado
     $btnSend
@@ -64,7 +89,20 @@ $(function () {
     $contactForm.trigger("reset");
   });
 
-  // Smooth Scroll SOLO para enlaces del menú
+  // --- Botón LIMPIAR: restaura estado de enviar y limpia mensajes ---
+  $btnReset.on("click", function () {
+
+    $btnSend
+      .removeClass("btn-success")
+      .addClass("btn-primary")
+      .html(`<i class="bi bi-send"></i> Enviar`)
+      .prop("disabled", false);
+
+    // Limpiar mensajes con fade
+    clearAlert();
+  });
+
+  // Smooth Scroll SOLO para links del menú
   $('.navbar a[href^="#"]').on("click", function (event) {
     const destino = $(this.getAttribute("href"));
 
@@ -76,7 +114,7 @@ $(function () {
         {
           scrollTop: destino.offset().top,
         },
-        800,
+        700,
         "swing"
       );
     }

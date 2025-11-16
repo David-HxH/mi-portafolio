@@ -31,6 +31,7 @@ main {
 }
 
 #contactForm {
+  position: relative;
   max-width: 340px;
   padding: 24px;
   border-radius: 12px;
@@ -86,7 +87,7 @@ main {
   transform: translateY(-50%);
   font-size: 18px;
   color: #ccc;
-  pointer-events: none; /* 🔹 evita que bloquee clics en el input */
+  pointer-events: none;
 }
 
 .div-buttons {

@@ -123,11 +123,11 @@ $(function () {
     }
 
     // Cerrar el navbar si está abierto (modo móvil)
-    const navbarCollapse = $("#navbarNavAltMarkup");
+    const navbarCollapse = $("#navbarNavDropdown");
 
     if (navbarCollapse.hasClass("show")) {
       const bsCollapse = bootstrap.Collapse.getInstance(
-        document.getElementById("navbarNavAltMarkup")
+        document.getElementById("navbarNavDropdown")
       );
       bsCollapse.hide();
     }

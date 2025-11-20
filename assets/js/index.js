@@ -91,7 +91,6 @@ $(function () {
 
   // --- Botón LIMPIAR: restaura estado de enviar y limpia mensajes ---
   $btnReset.on("click", function () {
-
     $btnSend
       .removeClass("btn-success")
       .addClass("btn-primary")
@@ -117,6 +116,16 @@ $(function () {
         700,
         "swing"
       );
+    }
+
+    // Cerrar el navbar si está abierto (modo móvil)
+    const navbarCollapse = $("#navbarNavAltMarkup");
+
+    if (navbarCollapse.hasClass("show")) {
+      const bsCollapse = bootstrap.Collapse.getInstance(
+        document.getElementById("navbarNavAltMarkup")
+      );
+      bsCollapse.hide();
     }
   });
 });

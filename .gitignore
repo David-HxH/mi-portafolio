@@ -1,0 +1,12 @@
+# VSCode
+.vscode/
+
+# Node
+node_modules/
+
+# Logs
+*.log
+
+# Live Server temp files
+*.tmp
+

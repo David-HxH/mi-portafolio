@@ -109,9 +109,13 @@ $(function () {
 
     if (destino.length) {
       event.preventDefault();
+
+      // Obtener altura del navbar (dinámico)
+      const offset = $(".navbar").outerHeight(); // ← IMPORTANTE
+
       $("html, body").animate(
         {
-          scrollTop: destino.offset().top,
+          scrollTop: destino.offset().top - offset - 5, // Extra margen estético
         },
         700,
         "swing"

@@ -6,6 +6,9 @@
 
 Bienvenido a mi portafolio web. Este proyecto reúne mis trabajos, habilidades y proyectos desarrollados durante mi aprendizaje en desarrollo web, con un enfoque en diseño limpio, responsive y buenas prácticas.
 
+## 🧑‍💻 Sobre mí
+Soy un desarrollador web apasionado por crear experiencias digitales innovadoras y responsivas. Me especializo en el desarrollo frontend con tecnologías modernas y siempre busco mejorar mis habilidades técnicas.
+
 ## 🚀 Tecnologías utilizadas
 - **HTML5**
 - **CSS3**
@@ -31,11 +34,12 @@ Puedes ver el sitio aquí:
 
 👉 **https://david-hxh.github.io/mi-portafolio**
 
-## 📸 Vista previa
-*(agregar una captura de pantalla)*
+<!-- ## 📸 Vista previa
+*(agregar una captura de pantalla)* -->
 
 ## 📂 Cómo clonar este repositorio
 Si deseas revisar el código o modificarlo:
 
 ```bash
 git clone https://github.com/David-HxH/mi-portafolio.git
+```

@@ -1,7 +1,7 @@
 <h1 align="center"> 🌐 Mi Portafolio – David Mondaca</h1>
 
 <p align="center">
-  <img src="./images/hide-cat.gif" width="200"/>
+  <img src="./assets/images/hide-cat.gif" width="200"/>
 </p>
 
 Bienvenido a mi portafolio web. Este proyecto reúne mis trabajos, habilidades y proyectos desarrollados durante mi aprendizaje en desarrollo web, con un enfoque en diseño limpio, responsive y buenas prácticas.

@@ -43,3 +43,8 @@ Si deseas revisar el código o modificarlo:
 ```bash
 git clone https://github.com/David-HxH/mi-portafolio.git
 ```
+## 📬 Contacto
+Si deseas contactarme, puedes hacerlo a través de:
+- **Email:** [David Mondaca](mailto:David_ems@live.cl)
+- **LinkedIn:** [David Mondaca](https://www.linkedin.com/in/davidmondacasaavedra/)
+- **instagram:** [@david_mondaca](https://www.instagram.com/david_ems.88/)
